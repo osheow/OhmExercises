@@ -1,5 +1,5 @@
-import assert from "nodes:assert/strict"
-import { matches } from "../src/ohm-stuff.js"
+import assert from "node:assert/strict";
+import { matches } from "../src/ohm-stuff.js";
 
 const testFixture = {
   canadianPostalCode: {
@@ -42,7 +42,16 @@ const testFixture = {
     bad: ["fOo", "gOO", "HoO", "zoo", "MOO", "123", "A15"],
   },
   divisibleBy16: {
-    good: ["0", "00", "000", "00000", "00000", "000000", "00000000", "1101000000"],
+    good: [
+      "0",
+      "00",
+      "000",
+      "00000",
+      "00000",
+      "000000",
+      "00000000",
+      "1101000000",
+    ],
     bad: ["1", "00000000100", "1000000001", "dog0000000"],
   },
   eightThroughThirtyTwo: {
@@ -52,7 +61,16 @@ const testFixture = {
     bad: ["1", "0", "00003", "dog", "", "361", "90", "7", "-11"],
   },
   notPythonPycharmPyc: {
-    good: ["", "pythons", "pycs", "PYC", "apycharm", "zpyc", "dog", "pythonpyc"],
+    good: [
+      "",
+      "pythons",
+      "pycs",
+      "PYC",
+      "apycharm",
+      "zpyc",
+      "dog",
+      "pythonpyc",
+    ],
     bad: ["python", "pycharm", "pyc"],
   },
   restrictedFloats: {
@@ -77,19 +95,19 @@ const testFixture = {
     ],
     bad: ["", "a", "ab", "abc", "abbbb", "cbcbcbcb"],
   },
-}
+};
 
 for (let name of Object.keys(testFixture)) {
   describe(`when matching ${name}`, () => {
     for (let s of testFixture[name].good) {
       it(`accepts ${s}`, () => {
-        assert.ok(matches(name, s))
-      })
+        assert.ok(matches(name, s));
+      });
     }
     for (let s of testFixture[name].bad) {
       it(`rejects ${s}`, () => {
-        assert.ok(!matches(name, s))
-      })
+        assert.ok(!matches(name, s));
+      });
     }
-  })
+  });
 }
